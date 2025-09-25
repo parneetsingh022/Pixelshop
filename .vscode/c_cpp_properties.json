@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "name": "MinGW",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "intelliSenseMode": "windows-gcc-x64",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "compilerPath": "C:/Program Files/CodeBlocks/MinGW/bin/g++.exe",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "C:/wxWidgets-3.3.1/include",
+        "C:/wxWidgets-3.3.1/build-mingw/lib/gcc_x64_dll/mswud"
+      ],
+      "browse": {
+        "path": [
+          "${workspaceFolder}",
+          "C:/wxWidgets-3.3.1/include",
+          "C:/wxWidgets-3.3.1/build-mingw/lib/gcc_x64_dll/mswud"
+        ],
+        "limitSymbolsToIncludedHeaders": false
+      }
+    }
+  ],
+  "version": 4
+}
