@@ -1,7 +1,6 @@
 #include <wx/wx.h>
 #include "ui/sidebar.h"
 
-
 class MyApp : public wxApp
 {
 public:
@@ -28,6 +27,12 @@ wxEND_EVENT_TABLE()
 
 bool MyApp::OnInit()
 {
+     // Set the application appearance to dark mode on Windows
+    #ifdef __WXMSW__
+    SetAppearance(wxApp::Appearance::Dark);
+    #endif
+
+
     MyFrame* frame = new MyFrame("Hello World", wxDefaultPosition, wxSize(800,600));
     frame->Show(true);
     return true;
