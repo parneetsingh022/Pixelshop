@@ -3,7 +3,11 @@
 
 #include <wx/wx.h>
 #include <wx/panel.h>
+#include <wx/stdpaths.h>
+
 #include "components/panel_bordered.h"
+#include "../colors.h"
+
 
 
 class SidebarPanel : public PanelBordered

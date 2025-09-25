@@ -1,0 +1,22 @@
+// ToolSpec.h
+#pragma once
+#include <wx/string.h>
+#include <vector>
+
+enum class ToolCategory {
+    Select,
+    Draw,
+    Shapes,
+    Edit
+};
+
+struct ToolSpec {
+    wxString id;        // stable identifier: "arrow", "brush", ...
+    wxString name;      // user-visible
+    wxString iconPath;  // relative to your resources dir
+    ToolCategory cat;
+};
+
+inline const std::vector<ToolSpec> sideBarTools = {
+    { "arrow",     "Arrow",     "../resources/sidebar_icons/arrow_selector_tool.png", ToolCategory::Select },
+};

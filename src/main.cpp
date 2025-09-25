@@ -3,21 +3,21 @@
 
 class MyApp : public wxApp
 {
-public:
-    virtual bool OnInit();
+    public:
+        virtual bool OnInit();
 };
 
 wxIMPLEMENT_APP(MyApp);
 
 class MyFrame : public wxFrame
 {
-public:
-    MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
+    public:
+        MyFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
 
-private:
-    void OnClick(wxCommandEvent&);
+    private:
+        void OnClick(wxCommandEvent&);
 
-    wxDECLARE_EVENT_TABLE();
+        wxDECLARE_EVENT_TABLE();
 };
 
 
@@ -27,6 +27,7 @@ wxEND_EVENT_TABLE()
 
 bool MyApp::OnInit()
 {
+    wxInitAllImageHandlers(); 
      // Set the application appearance to dark mode on Windows
     #ifdef __WXMSW__
     SetAppearance(wxApp::Appearance::Dark);
