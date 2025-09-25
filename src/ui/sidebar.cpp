@@ -9,7 +9,7 @@ SidebarPanel::SidebarPanel(wxWindow* parent,
                            const wxString& name)
     : PanelBordered(parent, id, pos, size, style, name)
 {
-    this->setBorder(true, 1, wxRIGHT, BORDER_COLOR);
-    SetBackgroundColour(wxColour(200, 200, 100));
+    this->setBorder(true, 1, wxRIGHT, BORDER_DEFAULT);
+    SetBackgroundColour(BG_DARK);
     
 }
