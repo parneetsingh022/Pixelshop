@@ -19,6 +19,8 @@ public:
                  const wxSize& size = wxDefaultSize,
                  long style = wxTAB_TRAVERSAL,
                  const wxString& name = wxPanelNameStr);
+private:
+    void DisplayTools(wxBoxSizer* sizer);
 
 };
 

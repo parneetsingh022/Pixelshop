@@ -4,7 +4,7 @@
 #include <vector>
 
 enum class ToolCategory {
-    Select,
+    Cursor,
     Draw,
     Shapes,
     Edit
@@ -18,5 +18,7 @@ struct ToolSpec {
 };
 
 inline const std::vector<ToolSpec> sideBarTools = {
-    { "arrow",     "Arrow",     "../resources/sidebar_icons/arrow_selector_tool.png", ToolCategory::Select },
+    { "arrow",     "Arrow",     "../resources/sidebar_icons/arrow_selector_tool.png", ToolCategory::Cursor },
+    { "drag pan",     "Drag Pan",     "../resources/sidebar_icons/drag_pan_tool.png", ToolCategory::Cursor },
+    
 };
