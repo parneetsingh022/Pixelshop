@@ -24,7 +24,7 @@ public:
                  const wxString& name = wxPanelNameStr);
 private:
     void DisplayTools(wxBoxSizer* sizer);
-    std::vector<IconButton*> addedTools;
+    IconButton* selectedButton{nullptr};
 
 };
 

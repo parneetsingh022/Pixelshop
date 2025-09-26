@@ -21,10 +21,21 @@ SidebarPanel::SidebarPanel(wxWindow* parent,
 
 
     this->SetSizer(sizer);
+    this->Bind(wxEVT_SIDEBAR_TOOL_SELECTED, [this](wxCommandEvent& evt) {
+        auto* clicked = static_cast<IconButton*>(evt.GetEventObject());
+
+        if (selectedButton && selectedButton != clicked) {
+            selectedButton->SetSelected(false);
+        }
+        clicked->SetSelected(true);
+        selectedButton = clicked;
+    });
 }
 
 void SidebarPanel::DisplayTools(wxBoxSizer* sizer){
     bool loadedAll = true;
+    IconButton *first_item{nullptr};
+
     for(ToolSpec item : sideBarTools){
         IconButton* icon = new IconButton(this, wxID_ANY, wxDefaultPosition, SIDEBAR_TOOL_SIZE);
         int status = icon->setImage(item.iconPath);
@@ -36,11 +47,14 @@ void SidebarPanel::DisplayTools(wxBoxSizer* sizer){
             continue;
         }
         
-        icon->LinkButtons(addedTools);
         sizer->Add(icon, 0, wxALL, 2);
-       
-        this->addedTools.push_back(icon);
+        if(!first_item) first_item = icon;
+
     }
+
+    // Setting the first item in menu as default selected tool
+    first_item->SetSelected(true);
+    selectedButton = first_item;
 
     if(!loadedAll) wxLogError("Failed to load some sidebar tool icons!");
 }

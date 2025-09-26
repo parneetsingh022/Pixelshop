@@ -8,6 +8,7 @@
 
 #include "../../colors.h"
 
+wxDECLARE_EVENT(wxEVT_SIDEBAR_TOOL_SELECTED, wxCommandEvent);
 
 class IconButton : public wxPanel
 {
@@ -20,9 +21,8 @@ public:
                  const wxString& name = wxPanelNameStr);
 
     int setImage(const wxString& svgPath);
-    void SetSelected(bool selected, bool lookForLinkedButtons=true);
+    void SetSelected(bool selected);
     bool IsSelected();
-    void LinkButtons(std::vector<IconButton*>& buttons);
 
 private:
         void OnEnter(wxMouseEvent& e);
@@ -38,7 +38,7 @@ private:
         wxColor backgroundColor{BG_DARK};
         wxColor hoverBackgroundColor{BG_CARD};
         wxColor selectedBackgroundColor{BG_LIGHT};
-        std::vector<IconButton*>* linkedButtons;
+
 };
 
 #endif

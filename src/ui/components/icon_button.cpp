@@ -1,5 +1,7 @@
 #include "icon_button.h"
 
+
+
 IconButton::IconButton(wxWindow* parent, 
                  wxWindowID id,
                  const wxPoint& pos,
@@ -16,6 +18,8 @@ IconButton::IconButton(wxWindow* parent,
     this->Bind(wxEVT_ENTER_WINDOW, &IconButton::OnEnter, this);
     this->Bind(wxEVT_LEAVE_WINDOW, &IconButton::OnLeave, this);
     this->Bind(wxEVT_LEFT_DOWN, &IconButton::OnLeftDown, this);
+
+
 }
 
 int IconButton::setImage(const wxString& svgPath)
@@ -46,22 +50,15 @@ int IconButton::setImage(const wxString& svgPath)
 #endif
 }
 
-void IconButton::LinkButtons(std::vector<IconButton*>& buttons) {
-    linkedButtons = &buttons; // no copies of widgets
-}
 
 bool IconButton::IsSelected(){
     return this->isSelected;
 }
 
-void IconButton::SetSelected(bool selected, bool lookForLinkedButtons) {
-    if (lookForLinkedButtons && linkedButtons) {
-        for (auto* btn : *linkedButtons) {
-            if (btn && btn != this && btn->IsSelected())
-                btn->SetSelected(false, false);
-        }
-    }
+wxDEFINE_EVENT(wxEVT_SIDEBAR_TOOL_SELECTED, wxCommandEvent);
 
+void IconButton::SetSelected(bool selected) {
+    
     isSelected = selected;
     SetBackgroundColour(selected ? selectedBackgroundColor : backgroundColor);
     Refresh();
@@ -94,6 +91,10 @@ void IconButton::OnLeave(wxMouseEvent& e){
 }
 
 void IconButton::OnLeftDown(wxMouseEvent& e){
+    wxCommandEvent evt(wxEVT_SIDEBAR_TOOL_SELECTED, GetId());
+    evt.SetEventObject(this);
+    GetParent()->GetEventHandler()->ProcessEvent(evt);
+
     this->SetSelected(true);
 
     e.Skip();
