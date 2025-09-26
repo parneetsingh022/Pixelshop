@@ -5,9 +5,12 @@
 #include <wx/panel.h>
 #include <wx/stdpaths.h>
 
+#include <vector>
+
 #include "components/panel_bordered.h"
 #include "../colors.h"
-
+#include "../ToolSpec.h"
+#include "components/icon_button.h"
 
 
 class SidebarPanel : public PanelBordered
@@ -21,6 +24,7 @@ public:
                  const wxString& name = wxPanelNameStr);
 private:
     void DisplayTools(wxBoxSizer* sizer);
+    std::vector<IconButton*> addedTools;
 
 };
 

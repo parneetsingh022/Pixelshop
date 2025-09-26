@@ -1,6 +1,5 @@
 #include "sidebar.h"
-#include "../ToolSpec.h"
-#include "components/icon_button.h"
+
 
 #define SIDEBAR_TOOL_SIZE wxSize(25,25)
 
@@ -36,8 +35,11 @@ void SidebarPanel::DisplayTools(wxBoxSizer* sizer){
             wxLogWarning("Failed to load icon: %s", item.iconPath);
             continue;
         }
-
+        
+        icon->LinkButtons(addedTools);
         sizer->Add(icon, 0, wxALL, 2);
+       
+        this->addedTools.push_back(icon);
     }
 
     if(!loadedAll) wxLogError("Failed to load some sidebar tool icons!");

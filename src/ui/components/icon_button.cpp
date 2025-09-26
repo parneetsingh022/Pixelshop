@@ -46,7 +46,30 @@ int IconButton::setImage(const wxString& svgPath)
 #endif
 }
 
+void IconButton::LinkButtons(std::vector<IconButton*>& buttons) {
+    linkedButtons = &buttons; // no copies of widgets
+}
+
+bool IconButton::IsSelected(){
+    return this->isSelected;
+}
+
+void IconButton::SetSelected(bool selected, bool lookForLinkedButtons) {
+    if (lookForLinkedButtons && linkedButtons) {
+        for (auto* btn : *linkedButtons) {
+            if (btn && btn != this && btn->IsSelected())
+                btn->SetSelected(false, false);
+        }
+    }
+
+    isSelected = selected;
+    SetBackgroundColour(selected ? selectedBackgroundColor : backgroundColor);
+    Refresh();
+    Update();
+}
+
 void IconButton::ApplyHoverStyles(bool on){
+    if(this->isSelected) return;
     this->isHover = on;
 
     SetBackgroundColour(on ? this->hoverBackgroundColor : this->backgroundColor);
@@ -56,8 +79,6 @@ void IconButton::ApplyHoverStyles(bool on){
 }
 
 void IconButton::OnEnter(wxMouseEvent& e){
-    if (this->isHover) return;
-
     SetCursor(wxCURSOR_HAND);
     ApplyHoverStyles(true);
     e.Skip();
@@ -73,6 +94,7 @@ void IconButton::OnLeave(wxMouseEvent& e){
 }
 
 void IconButton::OnLeftDown(wxMouseEvent& e){
-    std::cout << "Pressed" << std::endl;
+    this->SetSelected(true);
+
     e.Skip();
 }
