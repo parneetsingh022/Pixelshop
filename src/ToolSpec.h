@@ -18,7 +18,7 @@ struct ToolSpec {
 };
 
 inline const std::vector<ToolSpec> sideBarTools = {
-    { "arrow",     "Arrow",     "../resources/sidebar_icons/arrow_selector_tool.png", ToolCategory::Cursor },
-    { "drag pan",     "Drag Pan",     "../resources/sidebar_icons/drag_pan_tool.png", ToolCategory::Cursor },
+    { "arrow",     "Arrow",     "../resources/sidebar_icons/arrow_selector_tool.svg", ToolCategory::Cursor },
+    { "drag pan",     "Drag Pan",     "../resources/sidebar_icons/drag_pan_tool.svg", ToolCategory::Cursor },
     
 };

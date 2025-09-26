@@ -13,6 +13,7 @@ add_executable(
 	src/main.cpp 
 	src/ui/sidebar.cpp
 	src/ui/components/panel_bordered.cpp
+	src/ui/components/icon_button.cpp
 
 	app.rc)
 target_link_libraries(pixelshop ${wxWidgets_LIBRARIES})

@@ -1,5 +1,8 @@
 #include "sidebar.h"
 #include "../ToolSpec.h"
+#include "components/icon_button.h"
+
+#define SIDEBAR_TOOL_SIZE wxSize(25,25)
 
 SidebarPanel::SidebarPanel(wxWindow* parent,
                            wxWindowID id,
@@ -21,22 +24,20 @@ SidebarPanel::SidebarPanel(wxWindow* parent,
     this->SetSizer(sizer);
 }
 
-
 void SidebarPanel::DisplayTools(wxBoxSizer* sizer){
     bool loadedAll = true;
     for(ToolSpec item : sideBarTools){
-        wxBitmap bmp(
-            item.iconPath,
-            wxBITMAP_TYPE_PNG
-        );
+        IconButton* icon = new IconButton(this, wxID_ANY, wxDefaultPosition, SIDEBAR_TOOL_SIZE);
+        int status = icon->setImage(item.iconPath);
 
-        if (!bmp.IsOk()) {
+        // if there is an error loading the image
+        if (status != 0) {
             loadedAll = false;
             wxLogWarning("Failed to load icon: %s", item.iconPath);
             continue;
         }
-        auto* imgCtrl = new wxStaticBitmap(this, wxID_ANY, bmp);
-        sizer->Add(imgCtrl, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5);
+
+        sizer->Add(icon, 0, wxALL, 2);
     }
 
     if(!loadedAll) wxLogError("Failed to load some sidebar tool icons!");
